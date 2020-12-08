@@ -5,3 +5,5 @@ In this app, we have given users two options to find the recommended movies.
 2. Search by Rating: In this option, user needs to first ranks some movies from the given collection and we then apply the user based collaborative filtering (UBCF) algorithm to predict the top five movies to recommend to users. For this algorithm, we normalize the ratings by "z-score" algorithm. We are using the neighborhood size of 25 and the distance is using the cosine similarity measure. 
 
 The app is published at https://aknemani.shinyapps.io/FindMoviesYouLike/
+
+Note: There may be many functions in the code which are not directly used as they were written for extension of the app to give more flexibility in the future.
