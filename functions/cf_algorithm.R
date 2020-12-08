@@ -136,6 +136,26 @@ add_predictions_to_prediction_matrix <- function(predictions_matrix, part_predic
 #' @note Returned predictions matrix may not contain predictions for all \code{predictions_indices}. This is because of CF algorithm itself 
 #' (in case there are no similar users/items which can be used to find a prediction, for example)
 #' @note required Matrix, recommenderlab, slam, data.table
+
+predict_cf1 <- function(ratings_matrix, alg_method, num_recom)
+{
+  if(alg_method == "ubcf")
+  {
+    recom_UBCF_App = Recommender(ratings_matrix, method = 'UBCF', parameter = list(normalize = 'Z-score', method = 'Cosine', nn = 25))
+    pred_1 = predict(recom_UBCF_App, ratings_matrix[1], n = num_recom)
+  }
+  
+  if(alg_method == "ibcf")
+  {
+    recom_UBCF_App = Recommender(ratings_matrix, method = 'IBCF', parameter = list(normalize = 'Z-score', method = 'Cosine', k = 25))
+    pred_1 = predict(recom_UBCF_App, ratings_matrix[1], n = num_recom)
+  }
+  top_5_list <- as(pred_1, "list")
+  top_5_df <- data.frame(top_5_list)
+  colnames(top_5_df) <- "MovieID"
+  top_5_df$MovieID <- as.numeric(gsub("m", "", top_5_df$MovieID))
+  return(top_5_df)
+}
 predict_cf <- function(ratings_matrix, predictions_indices, alg_method, normalization, similarity_metric, k, make_positive_similarities, rowchunk_size, columnchunk_size){
   
   if(normalization){
