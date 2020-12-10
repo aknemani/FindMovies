@@ -58,30 +58,32 @@ shinyUI(dashboardPage(
                           fluidRow(box(
                             selectInput(
                               "selectedGenre",
-                              "Step 1: Select Your Favorite Genre:",
+                              "First load may take 30 seconds",
                               choices = c(
+                                "Action",
+                                "Adventure",
                                 "Animation",
                                 "Children's",
-                                "Comedy",
-                                "Adventure",
-                                "Fantasy",
-                                "Romance",
-                                "Drama",
-                                "Action",
                                 "Crime",
-                                "Thriller",
-                                "Horror",
-                                "Sci-Fi",
+                                "Comedy",
                                 "Documentary",
-                                "War",
+                                "Drama",
+                                "Fantasy",
+                                "Film-Noir",
+                                "Horror",
                                 "Musical",
                                 "Mystery",
-                                "Film-Noir",
+                                "Romance",
+                                "Sci-Fi",
+                                "Thriller",
+                                "War",
                                 "Western"
                               )
-                            )
+                            ),
+                            solidHeader = TRUE,
+                            title = "Step 1: Select Your Favorite Genre",
+                            status = "info"
                           )),
-                          
                           fluidRow(
                             useShinyjs(),
                             box(
@@ -89,10 +91,6 @@ shinyUI(dashboardPage(
                               status = "info",
                               solidHeader = TRUE,
                               title = "Step 2: Discover Movies You Might Like",
-                              br(),
-                              withBusyIndicatorUI(
-                                actionButton("btn2", "Click here to get your recommendations", class = "btn-warning")
-                              ),
                               br(),
                               tableOutput("RecomMovieList")
                             )
